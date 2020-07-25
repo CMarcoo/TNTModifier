@@ -1,0 +1,3 @@
+disable-tnt-rain: true
+fuse-fail-sound: 'ENTITY_CREEPER_PRIMED'
+fuse-fail-effect: 'SMOKE_LARGE'
