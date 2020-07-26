@@ -7,6 +7,8 @@ import org.bukkit.entity.EntityType
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.entity.EntityDamageByBlockEvent
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.ExplosionPrimeEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
@@ -52,6 +54,20 @@ class InteractionListener : Listener {
                 for (i in 1..50)
                     world.spawnParticle(Values.fuseFailEffectType, location.x, location.y, location.z, 1, 1.0, 1.0, 1.0, 0.35, null)
             }
+        }
+    }
+
+    fun onDamage(event: EntityDamageByEntityEvent) {
+        val entity = event.entity
+        val damager = event.damager
+
+        if (damager.type != EntityType.PRIMED_TNT) return
+
+        val increaseDamage = Values.increaseDamage
+        if (increaseDamage == -1) return
+
+        if (increaseDamage != null) {
+            event.damage = event.finalDamage + (event.finalDamage * (increaseDamage / 100))
         }
     }
 }

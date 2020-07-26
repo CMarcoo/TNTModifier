@@ -12,6 +12,7 @@ object Values {
 
     var fuseFailSound: String? = null
     var fuseFailEffect: String? = null
+    var increaseDamage: Int? = null
 
     var fuseFailSoundType: Sound? = null
     var fuseFailEffectType: Particle? = null
@@ -21,6 +22,7 @@ object Values {
         disableTNTOnRain = plugin?.config?.get("disable-tnt-rain") as Boolean?
         fuseFailSound = plugin?.config?.get("fuse-fail-sound") as String?
         fuseFailEffect = plugin?.config?.get("fuse-fail-effect") as String?
+        increaseDamage = plugin?.config?.getInt("increase-damage")
 
         try {
             fuseFailSoundType = Sound.valueOf(fuseFailSound!!)

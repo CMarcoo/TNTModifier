@@ -1,3 +1,8 @@
-disable-tnt-rain: true
-fuse-fail-sound: 'ENTITY_CREEPER_PRIMED'
-fuse-fail-effect: 'SMOKE_LARGE'
+disable-tnt-rain: true # TNT will not prime if the world is thundering or raining.
+fuse-fail-sound: 'ENTITY_CREEPER_PRIMED' # The sound to make when the fuse fails due to rain.
+fuse-fail-effect: 'SMOKE_LARGE' # The particle to spawn when the fuse fails due to rain.
+# Increase the damage of the TNT.
+# USE -1 TO DISABLE IT
+# The value is expressed IN PERCENTAGE OF INCREASE,
+# MEANING THAT FOR EXAMPLE "15" WILL INCREASE DAMAGE BY 15%
+increase-damage: -1
