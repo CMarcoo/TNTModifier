@@ -1,5 +1,5 @@
 name: TNTModifier
-version: ${project.version}
+version: 1.1.0
 main: me.thevipershow.tntmodifier.TNTModifier
 authors: [TheViperShow]
 description: Modify TNT mechanics.
