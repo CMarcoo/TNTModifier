@@ -26,14 +26,20 @@ class InteractionListener : Listener {
         if (event.isBlockInHand) return
 
         val clickedBlock = event.clickedBlock
-        if (clickedBlock.type != Material.TNT) return
-
-        if (Values.disableTNTOnRain!!) {
-            if (clickedBlock.world.hasStorm() || clickedBlock.world.isThundering) return
+        if (clickedBlock != null) {
+            if (clickedBlock.type != Material.TNT) return
         }
 
-        clickedBlock.type = Material.AIR
-        val adjustedSpawnLocation = clickedBlock.location.add(0.50, 0.05, 0.50)
+       // if (Values.disableTNTOnRain!!) {
+       //     if (clickedBlock != null) {
+       //         if (clickedBlock.world.hasStorm() || clickedBlock.world.isThundering) return
+       //     }
+       // }
+
+        if (clickedBlock != null) {
+            clickedBlock.type = Material.AIR
+        }
+        val adjustedSpawnLocation = clickedBlock!!.location.add(0.50, 0.05, 0.50)
         clickedBlock.world.spawnEntity(adjustedSpawnLocation, EntityType.PRIMED_TNT)
     }
 
@@ -44,15 +50,27 @@ class InteractionListener : Listener {
         if (entityType != EntityType.PRIMED_TNT) return
 
         if (Values.disableTNTOnRain!!) {
+            println("1")
             if (entity.world.hasStorm() || entity.world.isThundering) {
                 event.isCancelled = true
                 val location = entity.location
                 val world = location.world
 
-                world.playSound(location, Values.fuseFailSoundType, 10.0f, 1.0f)
-                world.dropItem(location.add(0.0, 0.15, 0.0), ItemStack(Material.TNT, 1))
+                println("2")
+                if (world != null) {
+                    println("3")
+                    Values.fuseFailSoundType?.let { world.playSound(location, it, 10.0f, 1.0f) }
+                }
+                if (world != null) {
+                    println("4")
+                    world.dropItem(location.add(0.0, 0.15, 0.0), ItemStack(Material.TNT, 1))
+                }
+
                 for (i in 1..50)
-                    world.spawnParticle(Values.fuseFailEffectType, location.x, location.y, location.z, 1, 1.0, 1.0, 1.0, 0.35, null)
+                    if (world != null) {
+                        Values.fuseFailEffectType?.let { world.spawnParticle(it, location.x, location.y, location.z, 1, 1.0, 1.0, 1.0, 0.35, null) }
+                    }
+                println("5")
             }
         }
     }

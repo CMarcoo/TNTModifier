@@ -7,13 +7,11 @@ import org.bukkit.command.CommandSender
 
 class TNTModifierCommand: CommandExecutor {
 
-    override fun onCommand(sender: CommandSender?, command: Command?, label: String?, args: Array<out String>?): Boolean {
-        if (args != null) {
-            if (args[0].equals("reload", true) && args.isEmpty()) {
-                Values.updateAll()
-                sender?.sendMessage("§8[§cTNTModifire§8]§7: Config.yml values updated correctly.")
-                return true
-            }
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+        if (args.isNotEmpty() && args[0].equals("reload", true)) {
+            Values.updateAll()
+            sender.sendMessage("§8[§cTNTModifire§8]§7: Config.yml values updated correctly.")
+            return true
         }
         return false
     }
